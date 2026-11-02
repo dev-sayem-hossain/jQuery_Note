@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery শেখার গাইড – প্রশ্ন, উত্তর ও লাইন-বাই-লাইন ব্যাখ্যা</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0e2a47;--blue:#1b6fd6;--cyan:#12a4c4;--bg:#f6f9fc;--card:#fff;--line:#dce6f0;--ink:#1c2b3a;--mute:#5b6b7b;--codebg:#0e2a47;--codeink:#e6f1ff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 "Hind Siliguri","Noto Sans Bengali","Segoe UI",sans-serif}
+code,pre,.c{font-family:Consolas,"SF Mono","Liberation Mono",monospace}
+.wrap{display:grid;grid-template-columns:270px 1fr;max-width:1200px;margin:0 auto}
+nav{position:sticky;top:0;height:100vh;overflow:auto;padding:28px 18px;border-right:1px solid var(--line);background:#fff}
+nav h1{font-size:19px;margin:0 0 4px;color:var(--navy);line-height:1.4}
+nav p{margin:0 0 16px;font-size:14px;color:var(--mute)}
+nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px;line-height:1.5}
+nav a:hover,nav a:focus-visible{background:#e8f1fc;color:var(--blue);outline:none}
+main{padding:36px 32px 80px;min-width:0}
+header.hero{margin-bottom:28px;padding:26px 28px;background:var(--navy);color:#fff;border-radius:10px}
+.hero h2{margin:0 0 6px;font-size:28px;line-height:1.4}
+.hero p{margin:0;color:#b9d3ee}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px 28px;margin-bottom:22px}
+section h2{margin:0 0 12px;font-size:23px;color:var(--navy);line-height:1.45;border-left:4px solid var(--cyan);padding-left:12px}
+h3{font-size:17px;margin:20px 0 6px;color:var(--blue)}
+p{margin:8px 0}
+.ans{background:#eef6ff;border-radius:8px;padding:10px 14px;margin:10px 0}
+code.i{background:#e8f1fc;color:var(--navy);padding:1px 6px;border-radius:4px;font-size:.92em}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#eaf2fb;color:var(--navy)}
+.tw{overflow-x:auto}
+.ex{margin:12px 0;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ex .t{padding:6px 12px;background:#eaf2fb;font-size:14px;color:var(--navy);font-weight:600}
+.row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);border-top:1px solid var(--line)}
+.row .c{background:var(--codebg);color:var(--codeink);padding:3px 12px;font-size:13.5px;white-space:pre;overflow-x:auto;line-height:1.7}
+.row .n{padding:3px 12px;font-size:15px;line-height:1.6;color:var(--ink);background:#fbfdff}
+.row.sp .n{color:var(--mute)}
+.demo{border:1px dashed var(--cyan);border-radius:8px;padding:14px;margin:12px 0;background:#f4fbfd}
+.demo>b{display:block;margin-bottom:8px;color:var(--navy)}
+button{font:inherit;font-size:15px;padding:5px 12px;border:0;border-radius:6px;background:var(--blue);color:#fff;cursor:pointer}
+button:hover{background:#1559ad}
+button:focus-visible,input:focus-visible{outline:3px solid #8cc4ff;outline-offset:1px}
+#box{width:150px;height:60px;margin-top:10px;background:var(--cyan);border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center}
+#taskInput{font:inherit;font-size:15px;padding:5px 10px;border:2px solid var(--line);border-radius:6px;width:220px;max-width:100%}
+#taskInput.err{border-color:#d33}
+#taskList{padding-left:20px;margin:10px 0}
+#taskList li{margin:4px 0}
+#taskList li .t{cursor:pointer}
+#taskList li.done .t{text-decoration:line-through;color:#8a99a8}
+#taskList .del{padding:0 8px;margin-left:8px;background:#d9534f;font-size:13px}
+.note{font-size:14.5px;color:var(--mute)}
+@media(max-width:900px){.wrap{display:block}nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:20px 14px 60px}section{padding:18px 16px}.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="সূচিপত্র">
+<h1>jQuery গাইড</h1>
+<p>প্রশ্ন–উত্তর + কোড ব্যাখ্যা</p>
+<a href="#s1">১. jQuery কী?</a>
+<a href="#s2">২. JavaScript বনাম jQuery</a>
+<a href="#s3">৩. jQuery কীভাবে কাজ করে?</a>
+<a href="#s4">৪. সিনট্যাক্স (Syntax)</a>
+<a href="#s5">৫. Variable তৈরি</a>
+<a href="#s6">৬. Selectors</a>
+<a href="#s7">৭. Events</a>
+<a href="#s8">৮. Effects ও Animation</a>
+<a href="#s9">৯. AJAX</a>
+<a href="#s10">১০. Traversing</a>
+<a href="#s11">মিনি প্রজেক্ট: To-Do List</a>
+</nav>
+
+<main>
+<header class="hero">
+<h2>jQuery শেখার সম্পূর্ণ গাইড</h2>
+<p>প্রতিটি প্রশ্নের উত্তর, প্রতিটি কোড লাইনের ব্যাখ্যা এবং শেষে একটি চালু মিনি প্রজেক্ট। (jQuery 3.7.1 ব্যবহার করা হয়েছে)</p>
+</header>
+
+<section id="s1">
+<h2>১. jQuery কী?</h2>
+<div class="ans"><b>উত্তর:</b> jQuery হলো একটি হালকা ও দ্রুত JavaScript লাইব্রেরি। এর স্লোগান: <i>“Write less, do more”</i> — অর্থাৎ কম কোড লিখে বেশি কাজ করা। এটি ২০০৬ সালে John Resig তৈরি করেন।</div>
+<p>jQuery দিয়ে HTML এলিমেন্ট বাছাই, ইভেন্ট হ্যান্ডেল, অ্যানিমেশন ও AJAX এর কাজ খুব সহজে করা যায়। jQuery আলাদা ভাষা নয়; এটি JavaScript দিয়েই লেখা।</p>
+<h3>পেজে jQuery যোগ করার নিয়ম</h3>
+<div class="ex" id="e1"></div>
+</section>
+
+<section id="s2">
+<h2>২. JavaScript ও jQuery এর মধ্যে পার্থক্য কী?</h2>
+<div class="ans"><b>উত্তর:</b> JavaScript হলো ভাষা, jQuery হলো সেই ভাষায় লেখা একটি লাইব্রেরি (তৈরি করা ফাংশনের সংগ্রহ)। একই কাজ jQuery তে ছোট কোডে হয়।</div>
+<div class="tw"><table>
+<tr><th>বিষয়</th><th>JavaScript (Vanilla)</th><th>jQuery</th></tr>
+<tr><td>ধরন</td><td>প্রোগ্রামিং ভাষা</td><td>JavaScript লাইব্রেরি</td></tr>
+<tr><td>কোড</td><td>তুলনামূলক বড়</td><td>ছোট ও সহজ</td></tr>
+<tr><td>সেটআপ</td><td>কিছু লাগে না</td><td>লাইব্রেরি ফাইল যোগ করতে হয়</td></tr>
+<tr><td>গতি</td><td>একটু দ্রুত</td><td>সামান্য ধীর (অতিরিক্ত ফাইল লোড হয়)</td></tr>
+<tr><td>ব্রাউজার সমস্যা</td><td>নিজে সামলাতে হয়</td><td>অনেকটা jQuery নিজে সামলায়</td></tr>
+</table></div>
+<h3>একই কাজ, দুই পদ্ধতিতে: “box” এলিমেন্ট লুকানো</h3>
+<div class="ex" id="e2"></div>
+</section>
+
+<section id="s3">
+<h2>৩. jQuery কীভাবে কাজ করে?</h2>
+<div class="ans"><b>উত্তর:</b> jQuery এর মূল ফাংশনের নাম <code class="i">jQuery</code>, এর ছোট নাম <code class="i">$</code>। আপনি <code class="i">$("selector")</code> লিখলে সে পেজ থেকে এলিমেন্ট খুঁজে একটি <b>jQuery অবজেক্টে</b> ভরে দেয়। ওই অবজেক্টে আগে থেকে তৈরি মেথড (<code class="i">hide()</code>, <code class="i">css()</code> ইত্যাদি) থাকে, সেগুলো কল করলেই কাজ হয়।</div>
+<p>ধাপগুলো: ১) পেজ লোড হয় → ২) <code class="i">$(document).ready()</code> অপেক্ষা করে HTML তৈরি হওয়া পর্যন্ত → ৩) selector এলিমেন্ট খোঁজে → ৪) মেথড কাজ করে → ৫) মেথড একই অবজেক্ট ফেরত দেয়, তাই একটির পর একটি মেথড জোড়া দেওয়া যায় (<b>Chaining</b>)।</p>
+<div class="ex" id="e3"></div>
+</section>
+
+<section id="s4">
+<h2>৪. jQuery সিনট্যাক্স (Syntax)</h2>
+<div class="ans"><b>উত্তর:</b> মূল গঠন: <code class="i">$(selector).action()</code> — <b>$</b> মানে jQuery শুরু, <b>selector</b> মানে কোন এলিমেন্ট, <b>action()</b> মানে তার উপর কী করা হবে।</div>
+<div class="ex" id="e4"></div>
+</section>
+
+<section id="s5">
+<h2>৫. jQuery Variable কীভাবে তৈরি করে?</h2>
+<div class="ans"><b>উত্তর:</b> jQuery এর নিজস্ব কোনো variable নেই; JavaScript এর <code class="i">var</code>, <code class="i">let</code>, <code class="i">const</code> ব্যবহার হয়। jQuery অবজেক্ট রাখলে নামের আগে <code class="i">$</code> দেওয়া একটি জনপ্রিয় নিয়ম, যাতে বোঝা যায় এটি jQuery অবজেক্ট।</div>
+<div class="ex" id="e5"></div>
+<p class="note">লক্ষ্য করুন: একই এলিমেন্ট বারবার খোঁজার চেয়ে variable এ রেখে দিলে কোড দ্রুত ও পরিষ্কার হয়।</p>
+</section>
+
+<section id="s6">
+<h2>৬. jQuery Selectors (এলিমেন্ট সিলেক্ট করার নিয়ম)</h2>
+<div class="ans"><b>উত্তর:</b> Selector দিয়ে বলে দেওয়া হয় কোন HTML এলিমেন্টের উপর কাজ হবে। নিয়ম CSS selector এর মতোই।</div>
+<div class="tw"><table>
+<tr><th>Selector</th><th>অর্থ</th></tr>
+<tr><td><code class="i">$("p")</code></td><td>সব &lt;p&gt; ট্যাগ</td></tr>
+<tr><td><code class="i">$("#menu")</code></td><td>id="menu" এলিমেন্ট</td></tr>
+<tr><td><code class="i">$(".item")</code></td><td>class="item" সব এলিমেন্ট</td></tr>
+<tr><td><code class="i">$("ul li")</code></td><td>&lt;ul&gt; এর ভেতরের সব &lt;li&gt;</td></tr>
+<tr><td><code class="i">$("ul &gt; li")</code></td><td>&lt;ul&gt; এর সরাসরি সন্তান &lt;li&gt;</td></tr>
+<tr><td><code class="i">$("li:first-child")</code></td><td>প্রথম &lt;li&gt;</td></tr>
+<tr><td><code class="i">$("input[type='text']")</code></td><td>attribute মিলিয়ে নির্বাচন</td></tr>
+<tr><td><code class="i">$("h1, p")</code></td><td>একসাথে একাধিক selector</td></tr>
+<tr><td><code class="i">$(this)</code></td><td>বর্তমানে যে এলিমেন্টে কাজ চলছে সেটি</td></tr>
+</table></div>
+<div class="ex" id="e6"></div>
+</section>
+
+<section id="s7">
+<h2>৭. jQuery Events (ক্লিক, হোভার বা ইউজার অ্যাকশন হ্যান্ডেল করা)</h2>
+<div class="ans"><b>উত্তর:</b> ইউজার যা করে (ক্লিক, মাউস রাখা, কী চাপা, ফর্ম সাবমিট) তাকে Event বলে। jQuery তে <code class="i">.on("event", function)</code> দিয়ে ইভেন্টে কাজ জুড়ে দেওয়া হয়।</div>
+<div class="ex" id="e7"></div>
+<p class="note">জনপ্রিয় ইভেন্ট: click, dblclick, hover, mouseenter, mouseleave, keyup, keydown, change, submit, focus, blur।</p>
+</section>
+
+<section id="s8">
+<h2>৮. jQuery Effects ও Animation (লুকানো, দেখানো, ফেড ইন/আউট)</h2>
+<div class="ans"><b>উত্তর:</b> jQuery তে এলিমেন্ট দেখানো/লুকানো, ফেড ও স্লাইড করার তৈরি মেথড আছে: <code class="i">hide, show, toggle, fadeIn, fadeOut, slideUp, slideDown</code>। নিজের মতো অ্যানিমেশনের জন্য <code class="i">animate()</code>।</div>
+<div class="demo"><b>লাইভ ডেমো — বোতামে ক্লিক করুন:</b>
+<button id="bHide">hide</button> <button id="bShow">show</button> <button id="bFade">fadeToggle</button> <button id="bSlide">slideToggle</button> <button id="bAnim">animate</button>
+<div id="box">আমি Box</div></div>
+<div class="ex" id="e8"></div>
+</section>
+
+<section id="s9">
+<h2>৯. jQuery AJAX (পেজ রিফ্রেশ ছাড়া ডেটা লোড করা)</h2>
+<div class="ans"><b>উত্তর:</b> AJAX দিয়ে সার্ভার থেকে ডেটা এনে পেজের একটি অংশ আপডেট করা যায়, পুরো পেজ রিলোড ছাড়া। jQuery তে এর জন্য <code class="i">$.ajax()</code>, <code class="i">$.get()</code>, <code class="i">$.post()</code>, <code class="i">.load()</code> আছে।</div>
+<div class="ex" id="e9"></div>
+<p class="note">এই কোড ইন্টারনেট সংযোগে চালাতে হবে। কোড লোকাল ফাইলে না চালিয়ে ওয়েব সার্ভারে (যেমন Live Server) চালানো ভালো।</p>
+</section>
+
+<section id="s10">
+<h2>১০. jQuery Traversing (Parent, Child, Sibling খোঁজা)</h2>
+<div class="ans"><b>উত্তর:</b> Traversing মানে একটি এলিমেন্ট থেকে শুরু করে তার বাবা (parent), সন্তান (children) ও ভাই-বোন (siblings) এলিমেন্টে যাওয়া — HTML কে একটি পরিবারের গাছের মতো ভাবুন।</div>
+<div class="tw"><table>
+<tr><th>মেথড</th><th>কাজ</th></tr>
+<tr><td><code class="i">parent()</code></td><td>সরাসরি বাবা এলিমেন্ট</td></tr>
+<tr><td><code class="i">parents()</code></td><td>সব উপরের পূর্বপুরুষ</td></tr>
+<tr><td><code class="i">closest("sel")</code></td><td>উপরের দিকে সবচেয়ে কাছের মিল</td></tr>
+<tr><td><code class="i">children()</code></td><td>সরাসরি সন্তান</td></tr>
+<tr><td><code class="i">find("sel")</code></td><td>ভেতরের যেকোনো স্তরের নাতি-নাতনিসহ</td></tr>
+<tr><td><code class="i">siblings()</code></td><td>একই বাবার অন্য সন্তান</td></tr>
+<tr><td><code class="i">next() / prev()</code></td><td>পরের / আগের ভাই</td></tr>
+<tr><td><code class="i">first() / last() / eq(n)</code></td><td>প্রথম / শেষ / n-তম (০ থেকে শুরু)</td></tr>
+</table></div>
+<div class="ex" id="e10"></div>
+</section>
+
+<section id="s11">
+<h2>মিনি প্রজেক্ট: To-Do List (প্রতিটি লাইনের ব্যাখ্যাসহ)</h2>
+<div class="ans"><b>প্রজেক্ট কী করে:</b> কাজ লিখে যোগ করা, ক্লিক করলে কাটা দাগ (সম্পন্ন), X চাপলে মুছে ফেলা এবং কতটি কাজ শেষ তার গণনা দেখানো। এখানে শেখা selector, event, effect ও traversing সব একসাথে ব্যবহার হয়েছে।</div>
+<div class="demo"><b>লাইভ ডেমো (নিচের কোড দিয়েই চলছে):</b>
+<input type="text" id="taskInput" placeholder="নতুন কাজ লিখুন" aria-label="নতুন কাজ">
+<button id="addBtn">যোগ করুন</button>
+<ul id="taskList"></ul>
+<p id="count" class="note"></p></div>
+<h3>ধাপ ১: HTML কাঠামো</h3>
+<div class="ex" id="p1"></div>
+<h3>ধাপ ২: CSS (সম্পন্ন কাজে কাটা দাগ, ভুলে লাল বর্ডার)</h3>
+<div class="ex" id="p2"></div>
+<h3>ধাপ ৩: jQuery কোড (লাইন-বাই-লাইন)</h3>
+<div class="ex" id="p3"></div>
+<p class="note">অনুশীলন: কাজ মুছতে ‘confirm’ চাওয়া, অথবা “সব মুছুন” বোতাম যোগ করে দেখুন।</p>
+</section>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>window.jQuery||document.write('<script src="https://code.jquery.com/jquery-3.7.1.min.js"><\/script>')</script>
+<script>
+/* কোড ও ব্যাখ্যা রেন্ডার করার ছোট ফাংশন: প্রতিটি [কোড, ব্যাখ্যা] জোড়া এক সারি */
+function E(id, title, rows) {
+  var el = document.getElementById(id), h = '<div class="t">' + title + '</div>';
+  rows.forEach(function (r) {
+    var c = document.createElement('div'); c.className = 'c'; c.textContent = r[0];
+    var n = document.createElement('div'); n.className = 'n'; n.textContent = r[1] || '';
+    var row = document.createElement('div'); row.className = 'row' + (r[1] ? '' : ' sp');
+    row.appendChild(c); row.appendChild(n); el.appendChild(row);
+  });
+  el.insertAdjacentHTML('afterbegin', h);
+}
+
+E('e1', 'index.html এ CDN দিয়ে jQuery যোগ', [
+ [`<!DOCTYPE html>`, `ব্রাউজারকে জানায় এটি আধুনিক HTML5 ডকুমেন্ট।`],
+ [`<html>`, `HTML পেজের শুরু।`],
+ [`<body>`, `পেজের দৃশ্যমান অংশ শুরু।`],
+ [`  <p id="msg">Hello</p>`, `একটি অনুচ্ছেদ; id="msg" দিয়ে একে jQuery দিয়ে ধরা যাবে।`],
+ [`  <script src="https://code.jquery.com/jquery-3.7.1.min.js"><\/script>`, `ইন্টারনেট (CDN) থেকে jQuery 3.7.1 ফাইল লোড করে। এটি অবশ্যই নিজের কোডের আগে বসাতে হয়।`],
+ [`  <script>`, `এখান থেকে আমাদের নিজের JavaScript/jQuery কোড শুরু।`],
+ [`    $("#msg").text("jQuery চালু!");`, `id="msg" এলিমেন্টের লেখা বদলে “jQuery চালু!” করে। এটি চললে বুঝবেন jQuery ঠিকঠাক যুক্ত হয়েছে।`],
+ [`  <\/script>`, `কোড শেষ।`],
+ [`</body>`, `body শেষ।`],
+ [`</html>`, `HTML শেষ।`]
+]);
+
+E('e2', 'Vanilla JavaScript বনাম jQuery', [
+ [`// --- JavaScript ---`, `কমেন্ট; ব্রাউজার এটি পড়ে না।`],
+ [`document.getElementById("box").style.display = "none";`, `পেজ থেকে id="box" খুঁজে তার CSS display "none" করে, ফলে লুকিয়ে যায়।`],
+ [`// --- jQuery ---`, `কমেন্ট।`],
+ [`$("#box").hide();`, `একই কাজ এক লাইনে: id="box" খুঁজে hide() মেথড কল।`]
+]);
+
+E('e3', 'কাজ করার ধাপ ও Chaining', [
+ [`$(document).ready(function () {`, `পেজের HTML পুরো লোড হলে ভেতরের কোড চালু হয়; না হলে এলিমেন্ট খুঁজে পাওয়া যেত না।`],
+ [`  $("p")`, `পেজের সব <p> খুঁজে jQuery অবজেক্টে নেয়।`],
+ [`    .css("color", "blue")`, `সবগুলোর লেখার রং নীল করে এবং একই অবজেক্ট ফেরত দেয়।`],
+ [`    .fadeIn(500);`, `ফেরত পাওয়া অবজেক্টেই আবার ০.৫ সেকেন্ডে ফেড-ইন। একে বলে Chaining।`],
+ [`});`, `ready ফাংশন শেষ।`]
+]);
+
+E('e4', 'সিনট্যাক্সের অংশগুলো', [
+ [`$(selector).action();`, `সাধারণ গঠন। selector = কাকে, action = কী করব।`],
+ [`$("p").hide();`, `$ দিয়ে jQuery শুরু, "p" সব অনুচ্ছেদ, hide() লুকানোর কাজ, শেষে সেমিকোলন।`],
+ [`$("#title").text("নতুন শিরোনাম");`, `text() ভেতরে মান দিলে লেখা বদলায় (set)।`],
+ [`var t = $("#title").text();`, `text() তে মান না দিলে বর্তমান লেখাটি পাওয়া যায় (get)।`],
+ [`$(".card").addClass("active");`, `class="card" সবকটিতে "active" ক্লাস যোগ।`],
+ [`$("a").attr("href", "https://example.com");`, `attr() দিয়ে attribute (এখানে href) এর মান বদলায়।`]
+]);
+
+E('e5', 'Variable ব্যবহার', [
+ [`var name = "Abid";`, `সাধারণ JavaScript variable; var পুরনো ধরন।`],
+ [`let count = 0;`, `let: পরে মান বদলানো যায় এমন variable।`],
+ [`const $title = $("#title");`, `const: আর বদলাবে না। $title নাম মানে এতে jQuery অবজেক্ট আছে (নামের $ কেবল নিয়ম, বাধ্যতামূলক নয়)।`],
+ [`$title.css("color", "red");`, `আবার selector না লিখে সংরক্ষিত অবজেক্টে সরাসরি মেথড চালানো।`],
+ [`count = count + 1;`, `count এর মান ১ বাড়ায়।`],
+ [`$title.text("মোট: " + count);`, `+ দিয়ে লেখা ও সংখ্যা জুড়ে এলিমেন্টে দেখায়।`]
+]);
+
+E('e6', 'Selector ব্যবহারের উদাহরণ', [
+ [`$("p").css("color", "gray");`, `সব <p> এর রং ধূসর।`],
+ [`$("#menu").hide();`, `শুধু id="menu" লুকায় (id অনন্য, তাই একটিই)।`],
+ [`$(".item").css("font-weight", "bold");`, `class="item" সবগুলো বোল্ড।`],
+ [`$("ul li:first-child").css("color", "red");`, `<ul> এর প্রথম <li> লাল।`],
+ [`$("li:nth-child(odd)").css("background", "#eee");`, `বিজোড় ক্রমের (১ম, ৩য়, ৫ম…) <li> তে ব্যাকগ্রাউন্ড।`],
+ [`$("input[type='text']").val("");`, `সব টেক্সট ইনপুটের মান খালি করে।`]
+]);
+
+E('e7', 'ক্লিক, হোভার, কী-প্রেস', [
+ [`$("#btn").on("click", function () {`, `id="btn" এ ক্লিক হলে ভেতরের ফাংশন চলবে।`],
+ [`  $("#msg").text("ক্লিক হয়েছে!");`, `msg এলিমেন্টের লেখা বদলায়।`],
+ [`});`, `ক্লিক ইভেন্ট শেষ।`],
+ [`$(".card").hover(`, `hover() দুটি ফাংশন নেয়: মাউস ঢুকলে ও বের হলে।`],
+ [`  function () { $(this).addClass("hl"); },`, `মাউস ঢুকলে: যে কার্ডের উপর আছে ($(this)) তাতে "hl" ক্লাস।`],
+ [`  function () { $(this).removeClass("hl"); }`, `মাউস বের হলে ক্লাস সরায়।`],
+ [`);`, `hover শেষ।`],
+ [`$("#name").on("keyup", function () {`, `ইনপুটে কী ছাড়লেই (প্রতিটি অক্ষর টাইপে) চলে।`],
+ [`  $("#live").text($(this).val());`, `val() দিয়ে ইনপুটের বর্তমান লেখা নিয়ে live এলিমেন্টে দেখায়।`],
+ [`});`, `keyup শেষ।`]
+]);
+
+E('e8', 'ডেমোর কোড', [
+ [`$("#bHide").on("click", function () {`, `hide বোতামে ক্লিক হলে:`],
+ [`  $("#box").hide(400);`, `৪০০ মিলিসেকেন্ডে সংকুচিত হয়ে লুকায়।`],
+ [`});`, ``],
+ [`$("#bShow").on("click", function () {`, `show বোতামে ক্লিক হলে:`],
+ [`  $("#box").show(400);`, `আবার ধীরে প্রকাশ।`],
+ [`});`, ``],
+ [`$("#bFade").on("click", function () {`, `fadeToggle বোতাম:`],
+ [`  $("#box").fadeToggle(600);`, `দেখা গেলে ফেড-আউট, লুকানো থাকলে ফেড-ইন (স্বচ্ছতা বদলে)।`],
+ [`});`, ``],
+ [`$("#bSlide").on("click", function () {`, `slideToggle বোতাম:`],
+ [`  $("#box").slideToggle(500);`, `উপরে গুটিয়ে যায় বা নিচে খুলে যায়।`],
+ [`});`, ``],
+ [`$("#bAnim").on("click", function () {`, `animate বোতাম:`],
+ [`  $("#box").animate({ width: "300px" }, 600)`, `CSS সংখ্যামানের property (width) ধীরে ৩০০px করে।`],
+ [`    .animate({ width: "150px" }, 600);`, `Chaining: এরপর আবার ১৫০px এ ফিরে আসে।`],
+ [`});`, ``]
+]);
+
+E('e9', '$.ajax ও $.get', [
+ [`$("#load").on("click", function () {`, `বোতামে ক্লিক হলে ডেটা আনা শুরু।`],
+ [`  $.ajax({`, `সার্ভারে অনুরোধ পাঠানোর অপশনের তালিকা শুরু।`],
+ [`    url: "https://jsonplaceholder.typicode.com/posts/1",`, `কোন ঠিকানা থেকে ডেটা আনব (ডেমো API)।`],
+ [`    method: "GET",`, `GET = ডেটা চাওয়া।`],
+ [`    dataType: "json",`, `উত্তর JSON আকারে আসবে বলে জানানো।`],
+ [`    success: function (data) {`, `সফল হলে চলবে; data এ উত্তর থাকে।`],
+ [`      $("#result").text(data.title);`, `পেজ রিলোড ছাড়াই result এ পোস্টের শিরোনাম বসায়।`],
+ [`    },`, ``],
+ [`    error: function () {`, `ব্যর্থ হলে (ইন্টারনেট নেই ইত্যাদি) চলবে।`],
+ [`      $("#result").text("ডেটা আনা যায়নি");`, `ইউজারকে ত্রুটির বার্তা দেখায়।`],
+ [`    }`, ``],
+ [`  });`, `$.ajax শেষ।`],
+ [`});`, `ক্লিক ইভেন্ট শেষ।`],
+ [`// সংক্ষিপ্ত রূপ`, ``],
+ [`$.get(url, function (data) { /* ... */ });`, `$.get হলো GET অনুরোধের ছোট রূপ।`],
+ [`$("#box").load("about.html");`, `about.html ফাইলের কনটেন্ট সরাসরি #box এর ভেতরে লোড করে।`]
+]);
+
+E('e10', 'পরিবারের গাছে ওঠানামা', [
+ [`<ul id="list">`, `HTML: বাবা এলিমেন্ট।`],
+ [`  <li>এক</li><li class="x">দুই</li><li>তিন</li>`, `তিন সন্তান, মাঝেরটির ক্লাস "x"।`],
+ [`</ul>`, ``],
+ [`$(".x").parent().css("border", "1px solid red");`, `"x" এর বাবা (<ul>) এ লাল বর্ডার।`],
+ [`$("#list").children().css("color", "blue");`, `<ul> এর সব সরাসরি সন্তান নীল।`],
+ [`$(".x").siblings().css("opacity", 0.5);`, `"x" ছাড়া বাকি দুই ভাই ঝাপসা।`],
+ [`$(".x").next().text("পরের ভাই");`, `"x" এর ঠিক পরের <li> এর লেখা বদলায়।`],
+ [`$(".x").prev().addClass("first");`, `ঠিক আগের <li> এ ক্লাস যোগ।`],
+ [`$("#list").find("li").last().hide();`, `ভেতরে সব <li> খুঁজে শেষটি লুকায় (chaining)।`],
+ [`$(".x").closest("ul").attr("id");`, `উপরের দিকে সবচেয়ে কাছের <ul> খুঁজে তার id ("list") পড়ে।`]
+]);
+
+/* ---------- মিনি প্রজেক্ট ---------- */
+E('p1', 'HTML', [
+ [`<input type="text" id="taskInput" placeholder="নতুন কাজ লিখুন">`, `কাজ লেখার বক্স; id দিয়ে jQuery এ ধরা হবে, placeholder খালি থাকলে ইঙ্গিত দেখায়।`],
+ [`<button id="addBtn">যোগ করুন</button>`, `যোগ করার বোতাম।`],
+ [`<ul id="taskList"></ul>`, `খালি তালিকা; কাজগুলো jQuery দিয়ে এর ভেতরে <li> হয়ে বসবে।`],
+ [`<p id="count"></p>`, `কতটি কাজ শেষ তা দেখানোর জায়গা।`]
+]);
+
+E('p2', 'CSS', [
+ [`#taskList li.done .t {`, `যে <li> এ "done" ক্লাস আছে তার ভেতরের লেখা (.t) নির্বাচন।`],
+ [`  text-decoration: line-through;`, `লেখার উপর কাটা দাগ।`],
+ [`  color: #8a99a8;`, `লেখা ফ্যাকাশে ধূসর।`],
+ [`}`, ``],
+ [`#taskInput.err { border-color: #d33; }`, `"err" ক্লাস থাকলে ইনপুটের বর্ডার লাল (খালি জমা দিলে)।`]
+]);
+
+var PROJECT = [
+ [`$(document).ready(function () {`, `পেজ প্রস্তুত হলে ভেতরের সব কোড চালু করে।`],
+ [``, ``],
+ [`  function updateCount() {`, `গণনা হালনাগাদের ফাংশন; যতবার দরকার ডাকা যাবে।`],
+ [`    var total = $("#taskList li").length;`, `তালিকার মোট <li> সংখ্যা (length) variable এ রাখে।`],
+ [`    var done = $("#taskList li.done").length;`, `"done" ক্লাসযুক্ত অর্থাৎ শেষ হওয়া কাজের সংখ্যা।`],
+ [`    $("#count").text(done + " / " + total + " কাজ শেষ");`, `“২ / ৫ কাজ শেষ” আকারে p এ বসায়।`],
+ [`  }`, `updateCount শেষ।`],
+ [``, ``],
+ [`  function addTask() {`, `নতুন কাজ যোগ করার ফাংশন।`],
+ [`    var text = $("#taskInput").val().trim();`, `ইনপুটের লেখা নিয়ে trim() দিয়ে আগে-পিছের ফাঁকা জায়গা কাটে।`],
+ [`    if (text === "") {`, `লেখা খালি কিনা পরীক্ষা।`],
+ [`      $("#taskInput").addClass("err").focus();`, `খালি হলে ইনপুটে লাল বর্ডার ও কার্সর বসায়।`],
+ [`      return;`, `ফাংশন এখানেই থামে; নিচের কিছু চলে না।`],
+ [`    }`, `if শেষ।`],
+ [`    $("#taskInput").removeClass("err");`, `লেখা ঠিক থাকলে লাল বর্ডার সরায়।`],
+ [`    var $li = $("<li></li>");`, `স্ট্রিং থেকে নতুন <li> এলিমেন্ট তৈরি (এখনও পেজে বসেনি)।`],
+ [`    $li.append($("<span class='t'></span>").text(text));`, `ভেতরে ".t" span বানিয়ে লেখা বসায়। text() ব্যবহারে ইউজারের HTML চলে না, তাই নিরাপদ।`],
+ [`    $li.append("<button class='del'>x</button>");`, `মুছে ফেলার বোতাম যোগ।`],
+ [`    $li.hide();`, `আগে লুকিয়ে রাখে, যাতে স্লাইড অ্যানিমেশন দেখা যায়।`],
+ [`    $("#taskList").append($li);`, `<li> কে তালিকার শেষে যোগ।`],
+ [`    $li.slideDown(200);`, `০.২ সেকেন্ডে নিচে নেমে এসে দেখা দেয়।`],
+ [`    $("#taskInput").val("").focus();`, `ইনপুট খালি করে আবার কার্সর রাখে (chaining)।`],
+ [`    updateCount();`, `গণনা হালনাগাদ।`],
+ [`  }`, `addTask শেষ।`],
+ [``, ``],
+ [`  $("#addBtn").on("click", addTask);`, `যোগ বোতামে ক্লিক হলে addTask চলবে। () নেই কারণ এখন ডাকছি না, শুধু নাম দিচ্ছি।`],
+ [``, ``],
+ [`  $("#taskInput").on("keyup", function (e) {`, `ইনপুটে কী ছাড়লে চলে; e এতে কোন কী চাপা হয়েছে তা থাকে।`],
+ [`    if (e.key === "Enter") { addTask(); }`, `Enter চাপা হলে কাজ যোগ হয়।`],
+ [`  });`, ``],
+ [``, ``],
+ [`  $("#taskList").on("click", ".t", function () {`, `Event Delegation: আগে থেকে <ul> এ শুনে ".t" এ ক্লিক ধরে। নতুন যোগ হওয়া কাজেও এটি কাজ করে।`],
+ [`    $(this).parent().toggleClass("done");`, `ক্লিক হওয়া span এর বাবা <li> এ "done" ক্লাস থাকলে সরায়, না থাকলে দেয়।`],
+ [`    updateCount();`, `গণনা বদলায়।`],
+ [`  });`, ``],
+ [``, ``],
+ [`  $("#taskList").on("click", ".del", function () {`, `delete বোতামে ক্লিক ধরে (এটিও delegation)।`],
+ [`    $(this).closest("li").slideUp(200, function () {`, `বোতাম থেকে উপরের কাছের <li> খুঁজে স্লাইড-আপ; শেষ হলে নিচের callback চলে।`],
+ [`      $(this).remove();`, `অ্যানিমেশন শেষে <li> কে পেজ থেকে সম্পূর্ণ মুছে ফেলে।`],
+ [`      updateCount();`, `মুছে ফেলার পর গণনা ঠিক করে।`],
+ [`    });`, `slideUp শেষ।`],
+ [`  });`, `delete ইভেন্ট শেষ।`],
+ [``, ``],
+ [`  updateCount();`, `পেজ খোলার সময় “০ / ০” গণনা দেখাতে একবার চালায়।`],
+ [`});`, `ready ফাংশন শেষ।`]
+];
+E('p3', 'jQuery (script.js)', PROJECT);
+
+/* ---------- লাইভ ডেমো চালু (উপরের একই কোড) ---------- */
+(function () {
+  if (!window.jQuery) { document.querySelector('header.hero p').insertAdjacentHTML('afterend','<p style="color:#ffd27a">jQuery লোড হয়নি (ইন্টারনেট দরকার) — লাইভ ডেমো চলবে না, কিন্তু লেখা ও কোড ব্যাখ্যা ঠিকই পড়া যাবে।</p>'); return; }
+  $.globalEval(PROJECT.map(function (r) { return r[0]; }).join("\n"));
+  $(function () {
+    $("#bHide").on("click", function () { $("#box").hide(400); });
+    $("#bShow").on("click", function () { $("#box").show(400); });
+    $("#bFade").on("click", function () { $("#box").fadeToggle(600); });
+    $("#bSlide").on("click", function () { $("#box").slideToggle(500); });
+    $("#bAnim").on("click", function () { $("#box").animate({ width: "300px" }, 600).animate({ width: "150px" }, 600); });
+    $("#taskInput").val("jQuery শেখা");
+    $("#addBtn").trigger("click");
+  });
+})();
+</script>
+</body>
+</html>
