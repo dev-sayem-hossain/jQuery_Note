@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>jQuery শেখার গাইড – প্রশ্ন, উত্তর ও লাইন-বাই-লাইন ব্যাখ্যা</title>
+<title>jQuery শেখার গাইড – প্রশ্ন, উত্তর ব্যাখ্যা</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0e2a47;--blue:#1b6fd6;--cyan:#12a4c4;--bg:#f6f9fc;--card:#fff;--line:#dce6f0;--ink:#1c2b3a;--mute:#5b6b7b;--codebg:#0e2a47;--codeink:#e6f1ff}
@@ -17,6 +17,9 @@ nav h1{font-size:19px;margin:0 0 4px;color:var(--navy);line-height:1.4}
 nav p{margin:0 0 16px;font-size:14px;color:var(--mute)}
 nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px;line-height:1.5}
 nav a:hover,nav a:focus-visible{background:#e8f1fc;color:var(--blue);outline:none}
+nav a.active{background:var(--blue);color:#fff;font-weight:600}
+nav a.active:hover{background:var(--blue);color:#fff}
+nav a:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
 main{padding:36px 32px 80px;min-width:0}
 header.hero{margin-bottom:28px;padding:26px 28px;background:var(--navy);color:#fff;border-radius:10px}
 .hero h2{margin:0 0 6px;font-size:28px;line-height:1.4}
@@ -51,6 +54,14 @@ button:focus-visible,input:focus-visible{outline:3px solid #8cc4ff;outline-offse
 #taskList li.done .t{text-decoration:line-through;color:#8a99a8}
 #taskList .del{padding:0 8px;margin-left:8px;background:#d9534f;font-size:13px}
 .note{font-size:14.5px;color:var(--mute)}
+.lv{display:inline-block;font-size:12.5px;font-weight:600;padding:1px 9px;border-radius:20px;margin-left:10px;vertical-align:middle;color:#fff;background:var(--blue)}
+.lv.b{background:#2e9e6b}.lv.m{background:var(--blue)}.lv.a{background:#7a4fd0}
+.road{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.road span{padding:3px 12px;border-radius:20px;font-size:14px;color:#fff}
+.msg{color:#d33;font-size:14px;margin-left:6px}
+.fld{margin:8px 0}.fld label{display:inline-block;min-width:60px}
+.fld input{font:inherit;font-size:15px;padding:5px 10px;border:2px solid var(--line);border-radius:6px;width:230px;max-width:100%}
+.nh{margin:14px 0 4px;font-size:13px;color:var(--mute)}
 @media(max-width:900px){.wrap{display:block}nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:20px 14px 60px}section{padding:18px 16px}.row{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -71,12 +82,21 @@ button:focus-visible,input:focus-visible{outline:3px solid #8cc4ff;outline-offse
 <a href="#s9">৯. AJAX</a>
 <a href="#s10">১০. Traversing</a>
 <a href="#s11">মিনি প্রজেক্ট: To-Do List</a>
+<div class="nh">অ্যাডভান্সড লেভেল</div>
+<a href="#a1">১১. DOM Manipulation</a>
+<a href="#a2">১২. ফর্ম ও Validation</a>
+<a href="#a3">১৩. অ্যাডভান্সড Events</a>
+<a href="#a4">১৪. AJAX Promise ও POST</a>
+<a href="#a5">১৫. নিজের Plugin তৈরি</a>
+<a href="#a6">১৬. Performance ও Best Practice</a>
+<a href="#a7">১৭. Debugging ও সাধারণ Error</a>
 </nav>
 
 <main>
 <header class="hero">
 <h2>jQuery শেখার সম্পূর্ণ গাইড</h2>
 <p>প্রতিটি প্রশ্নের উত্তর, প্রতিটি কোড লাইনের ব্যাখ্যা এবং শেষে একটি চালু মিনি প্রজেক্ট। (jQuery 3.7.1 ব্যবহার করা হয়েছে)</p>
+<div class="road"><span style="background:#2e9e6b">শুরু (Beginner)</span><span style="background:#1b6fd6">মধ্যম (Intermediate)</span><span style="background:#7a4fd0">অ্যাডভান্সড (Advanced)</span></div>
 </header>
 
 <section id="s1">
@@ -195,6 +215,105 @@ button:focus-visible,input:focus-visible{outline:3px solid #8cc4ff;outline-offse
 <h3>ধাপ ৩: jQuery কোড (লাইন-বাই-লাইন)</h3>
 <div class="ex" id="p3"></div>
 <p class="note">অনুশীলন: কাজ মুছতে ‘confirm’ চাওয়া, অথবা “সব মুছুন” বোতাম যোগ করে দেখুন।</p>
+</section>
+
+<section id="a1">
+<h2>১১. DOM Manipulation (পেজের কনটেন্ট বদলানো)</h2>
+<div class="ans"><b>উত্তর:</b> DOM হলো ব্রাউজারে পেজের গাছ-কাঠামো। jQuery দিয়ে এলিমেন্ট তৈরি, বদল, যোগ ও মুছে ফেলা যায়।</div>
+<div class="tw"><table>
+<tr><th>মেথড</th><th>কাজ</th></tr>
+<tr><td><code class="i">text() / html() / val()</code></td><td>লেখা / HTML / ফর্মের মান পড়া বা বদলানো</td></tr>
+<tr><td><code class="i">append() / prepend()</code></td><td>ভেতরের শেষে / শুরুতে যোগ</td></tr>
+<tr><td><code class="i">after() / before()</code></td><td>এলিমেন্টের পরে / আগে যোগ</td></tr>
+<tr><td><code class="i">remove() / empty()</code></td><td>এলিমেন্ট মোছা / শুধু ভেতরটা খালি করা</td></tr>
+<tr><td><code class="i">attr() / prop()</code></td><td>attribute / property (checkbox এর checked এ prop)</td></tr>
+<tr><td><code class="i">data()</code></td><td>data-* attribute পড়া বা সংরক্ষণ</td></tr>
+<tr><td><code class="i">clone()</code></td><td>এলিমেন্টের কপি</td></tr>
+</table></div>
+<div class="ex" id="x1"></div>
+</section>
+
+<section id="a2">
+<h2>১২. ফর্ম হ্যান্ডলিং ও Validation</h2>
+<div class="ans"><b>উত্তর:</b> ফর্ম সাবমিটে পেজ রিলোড বন্ধ করতে <code class="i">e.preventDefault()</code> দিতে হয়; এরপর মান পরীক্ষা (validate) করে ঠিক হলে কাজ এগোয়। সার্ভারে পাঠাতে <code class="i">serialize()</code> ব্যবহার হয়।</div>
+<div class="demo"><b>লাইভ ডেমো — ভুল তথ্য দিয়ে সাবমিট করে দেখুন:</b>
+<form id="regForm" novalidate>
+<div class="fld"><label for="fName">নাম</label><input id="fName" type="text"><span class="msg" id="nameMsg"></span></div>
+<div class="fld"><label for="fEmail">ইমেইল</label><input id="fEmail" type="text"><span class="msg" id="emailMsg"></span></div>
+<button type="submit">জমা দিন</button> <span id="formResult"></span>
+</form></div>
+<div class="ex" id="x2"></div>
+<p class="note">গুরুত্বপূর্ণ: ব্রাউজারের validation শুধু সুবিধার জন্য; আসল নিরাপত্তার জন্য সার্ভারেও সব তথ্য পরীক্ষা করতেই হবে।</p>
+</section>
+
+<section id="a3">
+<h2>১৩. অ্যাডভান্সড Events</h2>
+<div class="ans"><b>উত্তর:</b> বড় প্রজেক্টে আমরা Event Delegation, namespace, <code class="i">off()</code>, <code class="i">one()</code>, Custom Event ও debounce ব্যবহার করি, যাতে কোড দ্রুত, গোছানো ও মেমরি-বান্ধব থাকে।</div>
+<div class="tw"><table>
+<tr><th>কৌশল</th><th>কেন দরকার</th></tr>
+<tr><td>Delegation</td><td>বাবার উপর একটিই listener; পরে যোগ হওয়া সন্তানেও কাজ করে</td></tr>
+<tr><td>Namespace (<code class="i">click.app</code>)</td><td>নির্দিষ্ট গ্রুপের listener আলাদা করে সরানো যায়</td></tr>
+<tr><td><code class="i">one()</code></td><td>ইভেন্ট মাত্র একবার চলে</td></tr>
+<tr><td>Custom Event</td><td>নিজের নামের ইভেন্ট দিয়ে কম্পোনেন্টে কম্পোনেন্টে যোগাযোগ</td></tr>
+<tr><td>Debounce</td><td>scroll/resize/টাইপিং এ ঘন ঘন চলা আটকে কেবল থামলে চালানো</td></tr>
+</table></div>
+<div class="ex" id="x3"></div>
+</section>
+
+<section id="a4">
+<h2>১৪. AJAX Promise, POST ও একাধিক অনুরোধ</h2>
+<div class="ans"><b>উত্তর:</b> <code class="i">$.ajax()</code> একটি Promise-এর মতো অবজেক্ট ফেরত দেয়। তাই <code class="i">.done()</code>, <code class="i">.fail()</code>, <code class="i">.always()</code> চেইন করা যায়, আর <code class="i">$.when()</code> দিয়ে একাধিক অনুরোধ একসাথে সামলানো যায়।</div>
+<div class="ex" id="x4"></div>
+<p class="note">এই কোড ইন্টারনেট সংযোগে চালাতে হবে। jsonplaceholder একটি ডেমো API, তাই POST করলে আসল ডেটা সংরক্ষণ হয় না।</p>
+</section>
+
+<section id="a5">
+<h2>১৫. নিজের jQuery Plugin তৈরি</h2>
+<div class="ans"><b>উত্তর:</b> Plugin হলো নিজের তৈরি jQuery মেথড। <code class="i">$.fn</code> এ ফাংশন বসালে সেটি সব jQuery অবজেক্টে মেথড হয়ে যায়। ভালো plugin chaining বজায় রাখতে <code class="i">this</code> ফেরত দেয়।</div>
+<div class="demo"><b>লাইভ ডেমো:</b> <button id="plugBtn">highlight() চালান</button>
+<p class="plug-p">প্রথম অনুচ্ছেদ</p><p class="plug-p">দ্বিতীয় অনুচ্ছেদ</p></div>
+<div class="ex" id="x5"></div>
+</section>
+
+<section id="a6">
+<h2>১৬. Performance, Best Practice ও Modern JavaScript</h2>
+<div class="ans"><b>উত্তর:</b> কয়েকটি অভ্যাস মানলে jQuery কোড দ্রুত ও পরিষ্কার থাকে।</div>
+<div class="tw"><table>
+<tr><th>অভ্যাস</th><th>উদাহরণ</th></tr>
+<tr><td>Selector cache করুন</td><td><code class="i">var $list = $("#list");</code> একবার, বারবার ব্যবহার</td></tr>
+<tr><td>Delegation ব্যবহার করুন</td><td>প্রতিটি <code class="i">li</code> এ আলাদা listener না দিয়ে <code class="i">ul</code> এ একটি</td></tr>
+<tr><td>DOM একবারে যোগ করুন</td><td>লুপের ভেতর <code class="i">append</code> না করে HTML জমিয়ে শেষে একবার</td></tr>
+<tr><td>Chaining করুন</td><td>একই এলিমেন্টে বারবার খোঁজা এড়ায়</td></tr>
+<tr><td>নির্দিষ্ট selector লিখুন</td><td><code class="i">$("#menu .item")</code>, শুধু <code class="i">$(".item")</code> এর চেয়ে দ্রুত</td></tr>
+<tr><td>jQuery অবজেক্টে <code class="i">$</code> প্রিফিক্স</td><td><code class="i">$box</code> দেখলেই বোঝা যায় এটি jQuery</td></tr>
+</table></div>
+<h3>jQuery বনাম Modern JavaScript (এখন কী ব্যবহার হয়)</h3>
+<div class="tw"><table>
+<tr><th>কাজ</th><th>jQuery</th><th>Modern JS</th></tr>
+<tr><td>এলিমেন্ট খোঁজা</td><td><code class="i">$(".a")</code></td><td><code class="i">document.querySelectorAll(".a")</code></td></tr>
+<tr><td>ক্লাস যোগ</td><td><code class="i">$el.addClass("x")</code></td><td><code class="i">el.classList.add("x")</code></td></tr>
+<tr><td>ইভেন্ট</td><td><code class="i">$el.on("click", fn)</code></td><td><code class="i">el.addEventListener("click", fn)</code></td></tr>
+<tr><td>ডেটা আনা</td><td><code class="i">$.get(url)</code></td><td><code class="i">fetch(url).then(r =&gt; r.json())</code></td></tr>
+<tr><td>প্রতিটির উপর কাজ</td><td><code class="i">$.each(arr, fn)</code></td><td><code class="i">arr.forEach(fn)</code></td></tr>
+</table></div>
+<p>কখন jQuery: পুরনো প্রজেক্ট, WordPress থিম/প্লাগইন, Bootstrap 4 ও দ্রুত প্রোটোটাইপ। নতুন বড় অ্যাপে React/Vue এর মতো ফ্রেমওয়ার্ক বেশি প্রচলিত, তবে jQuery জানা থাকলে পুরনো কোড বোঝা ও রক্ষণাবেক্ষণ সহজ হয়।</p>
+<div class="ex" id="x6"></div>
+</section>
+
+<section id="a7">
+<h2>১৭. Debugging ও সাধারণ Error</h2>
+<div class="ans"><b>উত্তর:</b> ব্রাউজারে F12 চেপে Console ট্যাব খুললে লাল লাইনে error ও লাইন নম্বর পাওয়া যায়। নিচে সবচেয়ে বেশি হওয়া error গুলো ও সমাধান।</div>
+<div class="tw"><table>
+<tr><th>Error / সমস্যা</th><th>কারণ</th><th>সমাধান</th></tr>
+<tr><td><code class="i">$ is not defined</code></td><td>jQuery ফাইল লোড হয়নি বা নিজের স্ক্রিপ্টের পরে বসেছে</td><td>jQuery &lt;script&gt; আগে বসান; ইন্টারনেট/ফাইল পাথ দেখুন</td></tr>
+<tr><td>কিছুই ঘটছে না, error ও নেই</td><td>selector ভুল বা এলিমেন্ট তখনও তৈরি হয়নি</td><td><code class="i">console.log($("#x").length)</code>; ০ হলে selector ঠিক করুন, <code class="i">ready()</code> এ কোড রাখুন</td></tr>
+<tr><td>নতুন যোগ করা এলিমেন্টে ক্লিক কাজ করে না</td><td>সরাসরি listener শুধু আগের এলিমেন্টে লাগে</td><td>Event Delegation ব্যবহার করুন</td></tr>
+<tr><td><code class="i">Syntax error, unrecognized expression</code></td><td>selector এ ভুল চিহ্ন বা quote</td><td>selector স্ট্রিং আবার দেখুন</td></tr>
+<tr><td><code class="i">Unexpected end of input</code></td><td>বন্ধনী <code class="i">)</code> বা <code class="i">}</code> বাদ পড়েছে, বা স্ক্রিপ্ট ট্যাগের ভেতরে <code class="i">&lt;/script&gt;</code> লেখা</td><td>বন্ধনী মিলিয়ে দেখুন</td></tr>
+<tr><td>CORS error (AJAX)</td><td>অন্য ডোমেইন অনুমতি দেয়নি</td><td>সার্ভারে CORS চালু করুন বা নিজের ব্যাকএন্ড দিয়ে অনুরোধ পাঠান</td></tr>
+<tr><td>একই id একাধিকবার</td><td>id অনন্য হতে হয়; jQuery শুধু প্রথমটি ধরে</td><td>class ব্যবহার করুন</td></tr>
+</table></div>
+<div class="ex" id="x7"></div>
 </section>
 </main>
 </div>
@@ -398,10 +517,142 @@ var PROJECT = [
 ];
 E('p3', 'jQuery (script.js)', PROJECT);
 
+
+E('x1', 'তৈরি, যোগ, বদল, মোছা', [
+ [`$("#box").html("<b>বোল্ড লেখা</b>");`, `html() দিয়ে ভেতরে HTML বসায়। ইউজারের লেখা হলে text() ব্যবহার করুন, নইলে নিরাপত্তা-ঝুঁকি।`],
+ [`$("ul").append("<li>শেষে</li>");`, `<ul> এর ভেতরের শেষে নতুন <li> যোগ।`],
+ [`$("ul").prepend("<li>শুরুতে</li>");`, `ভেতরের শুরুতে যোগ।`],
+ [`$("h2").after("<hr>");`, `<h2> এর ঠিক পরে (বাইরে) রেখা যোগ।`],
+ [`$("#old").remove();`, `এলিমেন্ট ও তার ভেতরের সব কিছু পেজ থেকে মুছে।`],
+ [`$("#list").empty();`, `তালিকা থাকবে, শুধু ভেতরের সন্তানগুলো মুছে।`],
+ [`$("#agree").prop("checked", true);`, `checkbox টিক দেয়। অবস্থার জন্য attr নয়, prop ব্যবহার করতে হয়।`],
+ [`var id = $("#card").data("id");`, `HTML এর data-id="7" এর মান (7) পড়ে।`],
+ [`$("li").each(function (i) {`, `প্রতিটি <li> এর উপর ঘুরে ফাংশন চালায়; i হলো ক্রম (০ থেকে)।`],
+ [`  $(this).text((i + 1) + ". " + $(this).text());`, `এই মুহূর্তের <li> এর লেখার আগে ক্রমিক নম্বর বসায়।`],
+ [`});`, `each শেষ।`],
+ [`var $copy = $("#card").clone();`, `কার্ডের কপি তৈরি (এখনও পেজে বসেনি)।`],
+ [`$("#wrap").append($copy);`, `কপিটি #wrap এ বসায়।`]
+]);
+
+E('x2', 'Validation কোড (উপরের ডেমো এই কোড দিয়েই চলছে)', [
+ [`$("#regForm").on("submit", function (e) {`, `ফর্ম সাবমিট হলে ফাংশন চলবে।`],
+ [`  e.preventDefault();`, `ব্রাউজারের ডিফল্ট আচরণ (পেজ রিলোড) বন্ধ করে।`],
+ [`  var name = $("#fName").val().trim();`, `নামের মান নিয়ে আগে-পিছের ফাঁকা কাটে।`],
+ [`  var email = $("#fEmail").val().trim();`, `ইমেইলের মান একইভাবে।`],
+ [`  var ok = true;`, `ফ্ল্যাগ: শুরুতে ধরে নিচ্ছি সব ঠিক।`],
+ [`  $(".msg").text("");`, `আগের সব ভুলের বার্তা মুছে নতুন করে শুরু।`],
+ [`  if (name.length < 3) {`, `নাম ৩ অক্ষরের কম হলে।`],
+ [`    $("#nameMsg").text("নাম কমপক্ষে ৩ অক্ষর");`, `নামের পাশে লাল বার্তা।`],
+ [`    ok = false;`, `ফ্ল্যাগ বদলে জানায় ভুল আছে।`],
+ [`  }`, ``],
+ [`  if (!/^\\S+@\\S+\\.\\S+$/.test(email)) {`, `Regular Expression: ফাঁকা ছাড়া লেখা @ লেখা . লেখা, এই ছাঁচে না মিললে।`],
+ [`    $("#emailMsg").text("সঠিক ইমেইল দিন");`, `ইমেইলের পাশে বার্তা।`],
+ [`    ok = false;`, ``],
+ [`  }`, ``],
+ [`  if (ok) {`, `সব ঠিক থাকলে।`],
+ [`    $("#formResult").text("ধন্যবাদ, " + name + "!").hide().fadeIn(300);`, `ধন্যবাদ বার্তা বসিয়ে লুকিয়ে আবার ফেড-ইন করে দেখায়।`],
+ [`    this.reset();`, `এখানে this হলো ফর্ম নিজেই; reset() সব ঘর খালি করে।`],
+ [`  }`, ``],
+ [`});`, `submit ইভেন্ট শেষ।`],
+ [`// সার্ভারে পাঠাতে:`, ``],
+ [`var data = $("#regForm").serialize();`, `ফর্মের সব ঘর "name=..&email=.." স্ট্রিংয়ে রূপান্তর, $.post এ পাঠানোর জন্য প্রস্তুত।`]
+]);
+
+E('x3', 'Delegation, Namespace, Custom Event, Debounce', [
+ [`$("#list").on("click.app", "li", function () {`, `<ul> এ শুনছে, কিন্তু শুধু "li" এ ক্লিক ধরবে (delegation)। ".app" হলো namespace নাম।`],
+ [`  $(this).toggleClass("sel");`, `ক্লিক হওয়া <li> এ "sel" ক্লাস অন-অফ।`],
+ [`});`, ``],
+ [`$("#list").off(".app");`, `".app" namespace এর সব listener একসাথে সরায়, অন্য listener অক্ষত থাকে।`],
+ [`$("#buy").one("click", function () {`, `one(): বোতামে প্রথম ক্লিকেই চলবে, এরপর আর নয় (দুইবার অর্ডার আটকাতে ভালো)।`],
+ [`  $(this).prop("disabled", true);`, `বোতাম নিষ্ক্রিয় করে দেয়।`],
+ [`});`, ``],
+ [`$(document).on("cart:updated", function (e, count) {`, `নিজের তৈরি ইভেন্ট "cart:updated" শোনে; দ্বিতীয় প্যারামিটার count আসে ট্রিগার থেকে।`],
+ [`  $("#cartBadge").text(count);`, `কার্টের সংখ্যা দেখায়।`],
+ [`});`, ``],
+ [`$(document).trigger("cart:updated", [3]);`, `যেকোনো জায়গা থেকে ইভেন্ট ছুঁড়ে দেয়; [3] হলো count এর মান।`],
+ [`function debounce(fn, wait) {`, `ঘন ঘন চলা ফাংশনকে ধীর করার সহায়ক ফাংশন।`],
+ [`  var t;`, `টাইমারের আইডি রাখে (বন্ধ হওয়া ফাংশনের ভেতরে সংরক্ষিত)।`],
+ [`  return function () {`, `নতুন একটি ফাংশন ফেরত দেয় যা আসলে ইভেন্টে বসবে।`],
+ [`    var ctx = this, args = arguments;`, `বর্তমান this ও আর্গুমেন্ট রেখে দেয়, পরে ব্যবহারের জন্য।`],
+ [`    clearTimeout(t);`, `আগের অপেক্ষমান টাইমার বাতিল।`],
+ [`    t = setTimeout(function () { fn.apply(ctx, args); }, wait);`, `wait সময় কোনো নতুন ডাক না এলে তবেই আসল ফাংশন চালায়।`],
+ [`  };`, ``],
+ [`}`, ``],
+ [`$("#q").on("keyup", debounce(function () {`, `ইনপুটে টাইপ থামার পর চালাবে।`],
+ [`  console.log("খোঁজা হচ্ছে: " + $(this).val());`, `এখানে সাধারণত AJAX সার্চ অনুরোধ যায়।`],
+ [`}, 400));`, `৪০০ মিলিসেকেন্ড অপেক্ষা।`]
+]);
+
+E('x4', 'Promise-স্টাইল AJAX', [
+ [`$.ajax({`, `POST অনুরোধ তৈরি শুরু।`],
+ [`  url: "https://jsonplaceholder.typicode.com/posts",`, `ঠিকানা।`],
+ [`  method: "POST",`, `POST = সার্ভারে নতুন ডেটা পাঠানো।`],
+ [`  contentType: "application/json",`, `আমরা JSON পাঠাচ্ছি, সার্ভারকে এটি জানায়।`],
+ [`  data: JSON.stringify({ title: "Hello", userId: 1 })`, `JavaScript অবজেক্টকে JSON স্ট্রিংয়ে রূপান্তর করে পাঠায়।`],
+ [`})`, `অনুরোধ পাঠায় ও Promise-এর মতো অবজেক্ট ফেরত দেয়, তাই নিচে চেইন চলছে।`],
+ [`.done(function (res) {`, `সফল হলে: res এ সার্ভারের উত্তর।`],
+ [`  $("#out").text("তৈরি হয়েছে, id: " + res.id);`, `উত্তরের id পেজে দেখায়।`],
+ [`})`, ``],
+ [`.fail(function (xhr, status, err) {`, `ব্যর্থ হলে: ত্রুটির তথ্য আসে।`],
+ [`  $("#out").text("ত্রুটি: " + (err || status));`, `ইউজারকে কারণসহ জানায়।`],
+ [`})`, ``],
+ [`.always(function () {`, `সফল বা ব্যর্থ, দুই ক্ষেত্রেই চলে।`],
+ [`  $("#spinner").hide();`, `লোডিং চিহ্ন লুকায়।`],
+ [`});`, ``],
+ [`// একাধিক অনুরোধ একসাথে`, ``],
+ [`$.when(`, `সব অনুরোধ শেষ হওয়া পর্যন্ত অপেক্ষা।`],
+ [`  $.get("/api/users"),`, `প্রথম অনুরোধ।`],
+ [`  $.get("/api/orders")`, `দ্বিতীয় অনুরোধ।`],
+ [`).done(function (users, orders) {`, `দুটোই সফল হলে দুটির উত্তর একসাথে পাওয়া যায়।`],
+ [`  console.log(users[0], orders[0]);`, `প্রতিটি উত্তরের প্রথম অংশ (index 0) আসল ডেটা।`],
+ [`});`, ``]
+]);
+
+E('x5', 'Plugin কোড (উপরের ডেমো এই কোড দিয়েই চলছে)', [
+ [`$.fn.highlight = function (color) {`, `$.fn এ "highlight" নামে নতুন মেথড বসায়। এখন যেকোনো $(...).highlight() চালানো যাবে।`],
+ [`  color = color || "yellow";`, `রং না দিলে ডিফল্ট হলুদ।`],
+ [`  return this.each(function () {`, `this হলো নির্বাচিত সব এলিমেন্ট। each() প্রতিটিতে কাজ করে এবং this ফেরত দেয় যাতে chaining চলে।`],
+ [`    $(this).css("background", color);`, `প্রতিটি এলিমেন্টের ব্যাকগ্রাউন্ড রং বসায়।`],
+ [`  });`, ``],
+ [`};`, `plugin শেষ।`],
+ [`$("#plugBtn").on("click", function () {`, `বোতামে ক্লিক হলে:`],
+ [`  $(".plug-p").highlight("#ffe08a");`, `সব ".plug-p" অনুচ্ছেদে আমাদের plugin চালায়।`],
+ [`});`, ``]
+]);
+
+E('x6', 'বাস্তব উদাহরণ: DOM একবারে যোগ করা ও selector cache', [
+ [`var $list = $("#list");`, `তালিকা একবারই খুঁজে variable এ রাখে।`],
+ [`var items = ["আম", "জাম", "কাঁঠাল"];`, `ডেটার অ্যারে।`],
+ [`var html = "";`, `HTML জমানোর খালি স্ট্রিং।`],
+ [`$.each(items, function (i, name) {`, `অ্যারের প্রতিটি আইটেমের উপর ঘোরে; i ক্রম, name মান।`],
+ [`  html += "<li>" + $("<div>").text(name).html() + "</li>";`, `<li> স্ট্রিংয়ে জোড়ে। text().html() কৌশলে বিশেষ চিহ্ন নিরাপদ (escape) করা হয়।`],
+ [`});`, ``],
+ [`$list.append(html);`, `শেষে একবারে সব যোগ, তাই পেজ কম বার আঁকতে হয় এবং দ্রুত।`]
+]);
+
+E('x7', 'ডিবাগিং কৌশল', [
+ [`console.log($("#box").length);`, `০ মানে selector কিছু পায়নি; ১ বা বেশি মানে পেয়েছে।`],
+ [`console.log($("#box"));`, `অবজেক্ট দেখায়; এলিমেন্ট ঠিক ধরা পড়েছে কিনা বোঝা যায়।`],
+ [`console.log(typeof jQuery);`, `"function" এলে jQuery লোড হয়েছে; "undefined" এলে লোড হয়নি।`],
+ [`console.log($.fn.jquery);`, `চলমান jQuery এর ভার্সন নম্বর দেখায়।`],
+ [`if (!$("#box").length) { return; }`, `এলিমেন্ট না থাকলে কোড থামিয়ে অপ্রয়োজনীয় ভুল এড়ায়।`],
+ [`try {`, `সম্ভাব্য ভুলের কোড এর ভেতরে রাখুন।`],
+ [`  JSON.parse(text);`, `ভুল JSON হলে এখানে error ছুঁড়বে।`],
+ [`} catch (err) {`, `error ধরা পড়লে এখানে আসবে, পেজ থেমে যাবে না।`],
+ [`  console.error("JSON ভুল:", err.message);`, `Console এ লাল রঙে কারণ দেখায়।`],
+ [`}`, ``]
+]);
+
 /* ---------- লাইভ ডেমো চালু (উপরের একই কোড) ---------- */
 (function () {
   if (!window.jQuery) { document.querySelector('header.hero p').insertAdjacentHTML('afterend','<p style="color:#ffd27a">jQuery লোড হয়নি (ইন্টারনেট দরকার) — লাইভ ডেমো চলবে না, কিন্তু লেখা ও কোড ব্যাখ্যা ঠিকই পড়া যাবে।</p>'); return; }
+  function src(id) { return Array.prototype.map.call(document.querySelectorAll('#' + id + ' .c'), function (c) { return c.textContent; }).join("\n"); }
   $.globalEval(PROJECT.map(function (r) { return r[0]; }).join("\n"));
+  /* ফর্ম: শুধু validation অংশ (শেষ ২ লাইনের মন্তব্য ও serialize বাদ), plugin: পুরো কোড */
+  $.globalEval('$(function(){' + src('x2').split("// সার্ভারে পাঠাতে:")[0] + '});');
+  $.globalEval('$(function(){' + src('x5') + '});');
+  /* লেভেল ব্যাজ */
+  [['s1','b','শুরু'],['s2','b','শুরু'],['s3','b','শুরু'],['s4','b','শুরু'],['s5','b','শুরু'],['s6','b','শুরু'],['s7','m','মধ্যম'],['s8','m','মধ্যম'],['s9','m','মধ্যম'],['s10','m','মধ্যম'],['s11','m','প্রজেক্ট'],['a1','m','মধ্যম'],['a2','m','মধ্যম'],['a3','a','অ্যাডভান্সড'],['a4','a','অ্যাডভান্সড'],['a5','a','অ্যাডভান্সড'],['a6','a','অ্যাডভান্সড'],['a7','b','সব লেভেল']].forEach(function (b) { $('#' + b[0] + ' h2').append('<span class="lv ' + b[1] + '">' + b[2] + '</span>'); });
   $(function () {
     $("#bHide").on("click", function () { $("#box").hide(400); });
     $("#bShow").on("click", function () { $("#box").show(400); });
@@ -411,6 +662,42 @@ E('p3', 'jQuery (script.js)', PROJECT);
     $("#taskInput").val("jQuery শেখা");
     $("#addBtn").trigger("click");
   });
+})();
+</script>
+<script>
+/* সাইডবার লিংক: ক্লিক করলে বা স্ক্রল করলে সংশ্লিষ্ট লিংক active হয় */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
+  var map = {}, locked = false, lockTimer;
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+
+  function setActive(id) {
+    links.forEach(function (a) {
+      var on = a.getAttribute('href') === '#' + id;
+      a.classList.toggle('active', on);
+      if (on) { a.setAttribute('aria-current', 'true'); if (a.scrollIntoView) { a.scrollIntoView({ block: 'nearest' }); } }
+      else { a.removeAttribute('aria-current'); }
+    });
+  }
+
+  links.forEach(function (a) {
+    a.addEventListener('click', function () {
+      setActive(a.getAttribute('href').slice(1));
+      locked = true; clearTimeout(lockTimer);
+      lockTimer = setTimeout(function () { locked = false; }, 900); /* স্মুথ স্ক্রলের সময় spy থামানো */
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (locked) { return; }
+      entries.forEach(function (en) { if (en.isIntersecting) { setActive(en.target.id); } });
+    }, { rootMargin: '-15% 0px -70% 0px' });
+    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) { io.observe(s); } });
+  }
+
+  var start = location.hash.slice(1);
+  setActive(map[start] ? start : 's1');
 })();
 </script>
 </body>
